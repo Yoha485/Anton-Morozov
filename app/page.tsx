@@ -114,10 +114,10 @@ export default function Home() {
             <p className="mt-6 leading-relaxed">
               Email is the direct way to reach me:{" "}
               <a
-                href="mailto:anton@anton-morozov.dev"
+                href="mailto:antonmorozoff64@gmail.com"
                 className="font-medium text-viridian underline decoration-viridian/40 hover:decoration-viridian"
               >
-                anton@anton-morozov.dev
+                antonmorozoff64@gmail.com
               </a>
             </p>
             <p className="mt-3 leading-relaxed text-muted">
