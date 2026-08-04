@@ -1,9 +1,8 @@
 const stack = [
   { name: "TypeScript", role: "The working language, across frontend and backend." },
+  { name: "React", role: "User interfaces." },
   { name: "Next.js", role: "Web application frontends." },
-  { name: "Nest.js", role: "Backend services and APIs." },
-  { name: "GraphQL", role: "The API layer between frontend and backend." },
-  { name: "Hasura", role: "GraphQL engine over the database." },
+  { name: "tRPC", role: "Typed APIs between frontend and backend." },
   { name: "PostgreSQL", role: "Data modelling, schemas, and storage." },
 ];
 
