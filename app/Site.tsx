@@ -1,10 +1,4 @@
-const stack = [
-  { name: "TypeScript", role: "The working language, across frontend and backend." },
-  { name: "React", role: "User interfaces." },
-  { name: "Next.js", role: "Web application frontends." },
-  { name: "tRPC", role: "Typed APIs between frontend and backend." },
-  { name: "PostgreSQL", role: "Data modelling, schemas, and storage." },
-];
+import type { Content } from "./content";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -14,28 +8,34 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function Home() {
+export function Site({ c }: { c: Content }) {
   return (
     <div className="mx-auto max-w-[68rem] px-6 sm:px-10">
       <main>
         {/* Hero */}
-        <section aria-label="Introduction" className="pb-16 pt-20 sm:pb-24 sm:pt-32">
-          <p className="reveal reveal-1 mb-10 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted">
-            Software developer · Warszawa, Poland
-          </p>
+        <section aria-label={c.hero.name} className="pb-16 pt-20 sm:pb-24 sm:pt-32">
+          <div className="reveal reveal-1 mb-10 flex items-baseline justify-between gap-6">
+            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted">
+              {c.hero.kicker}
+            </p>
+            <a
+              href={c.switchTo.path}
+              lang={c.switchTo.lang}
+              hrefLang={c.switchTo.lang}
+              aria-label={c.switchTo.ariaLabel}
+              className="shrink-0 text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-viridian underline decoration-viridian/40 hover:decoration-viridian print:hidden"
+            >
+              {c.switchTo.label}
+            </a>
+          </div>
           <h1 className="reveal reveal-2 font-display text-[clamp(2.5rem,9vw,6.5rem)] font-medium leading-[1.02] tracking-[-0.015em]">
-            Anton Morozov
+            {c.hero.name}
             <br />
-            <span className="italic text-viridian">Software Development</span>
+            <span className="italic text-viridian">{c.hero.tagline}</span>
           </h1>
-          <div
-            className="reveal reveal-3 mt-10 h-px w-24 bg-viridian"
-            aria-hidden="true"
-          />
+          <div className="reveal reveal-3 mt-10 h-px w-24 bg-viridian" aria-hidden="true" />
           <p className="reveal reveal-4 mt-10 max-w-[38rem] text-lg leading-relaxed text-ink sm:text-xl">
-            I design and build web applications for product companies in the
-            EU&nbsp;&mdash; working remotely, on long&#8209;term B2B contracts, as
-            one person.
+            {c.hero.intro}
           </p>
         </section>
 
@@ -45,30 +45,16 @@ export default function Home() {
           className="grid gap-6 border-t border-hairline py-14 sm:py-20 md:grid-cols-[11rem_1fr] md:gap-10"
         >
           <div className="pt-1">
-            <SectionLabel>Work</SectionLabel>
+            <SectionLabel>{c.work.label}</SectionLabel>
           </div>
           <div className="max-w-[38rem]">
             <h2 id="work-heading" className="font-display text-3xl font-medium leading-tight sm:text-4xl">
-              What I do
+              {c.work.heading}
             </h2>
             <div className="mt-6 space-y-5 leading-relaxed text-ink">
-              <p>
-                I build web applications end to end: frontends, APIs and backend
-                services, database schemas, third&#8209;party integrations, and
-                deployment. One person carries the work from first design to
-                running software.
-              </p>
-              <p>
-                I work as an embedded member of a client&rsquo;s product team on
-                long&#8209;term engagements &mdash; joining planning, owning
-                features through to production, and maintaining what I ship.
-              </p>
-              <p>
-                The work is custom software development, web application
-                development, and the technical consulting that goes with them.
-                Engagements are remote, contract&#8209;based, for companies in
-                the EU.
-              </p>
+              {c.work.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
             </div>
           </div>
         </section>
@@ -79,14 +65,14 @@ export default function Home() {
           className="grid gap-6 border-t border-hairline py-14 sm:py-20 md:grid-cols-[11rem_1fr] md:gap-10"
         >
           <div className="pt-1">
-            <SectionLabel>Stack</SectionLabel>
+            <SectionLabel>{c.stack.label}</SectionLabel>
           </div>
           <div className="max-w-[38rem]">
             <h2 id="stack-heading" className="font-display text-3xl font-medium leading-tight sm:text-4xl">
-              What I work with
+              {c.stack.heading}
             </h2>
             <dl className="mt-6">
-              {stack.map((item) => (
+              {c.stack.items.map((item) => (
                 <div
                   key={item.name}
                   className="grid gap-1 border-b border-hairline py-4 first:border-t sm:grid-cols-[10rem_1fr] sm:gap-4"
@@ -105,14 +91,14 @@ export default function Home() {
           className="grid gap-6 border-t border-hairline py-14 sm:py-20 md:grid-cols-[11rem_1fr] md:gap-10"
         >
           <div className="pt-1">
-            <SectionLabel>Contact</SectionLabel>
+            <SectionLabel>{c.contact.label}</SectionLabel>
           </div>
           <div className="max-w-[38rem]">
             <h2 id="contact-heading" className="font-display text-3xl font-medium leading-tight sm:text-4xl">
-              Get in touch
+              {c.contact.heading}
             </h2>
             <p className="mt-6 leading-relaxed">
-              Email is the direct way to reach me:{" "}
+              {c.contact.emailLead}
               <a
                 href="mailto:antonmorozoff64@gmail.com"
                 className="font-medium text-viridian underline decoration-viridian/40 hover:decoration-viridian"
@@ -121,14 +107,14 @@ export default function Home() {
               </a>
             </p>
             <p className="mt-3 leading-relaxed text-muted">
-              Code is on{" "}
+              {c.contact.codeLead}
               <a
                 href="https://github.com/reconcrete"
                 className="text-viridian underline decoration-viridian/40 hover:decoration-viridian"
               >
-                GitHub
+                {c.contact.codeLinkText}
               </a>
-              .
+              {c.contact.codeTail}
             </p>
           </div>
         </section>
@@ -136,13 +122,13 @@ export default function Home() {
 
       <footer className="border-t border-hairline py-12 sm:py-16">
         <p className="text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted">
-          Dane rejestrowe
+          {c.footer.label}
         </p>
         <div className="mt-5 space-y-1 text-sm leading-relaxed text-ink" lang="pl">
-          <p>Anton Morozov Software Development</p>
-          <p className="tabular-nums">NIP: 5223379772</p>
-          <p className="tabular-nums">REGON: 545339452</p>
-          <p>Warszawa, Polska</p>
+          <p>{c.footer.name}</p>
+          <p className="tabular-nums">{c.footer.nip}</p>
+          <p className="tabular-nums">{c.footer.regon}</p>
+          <p>{c.footer.city}</p>
         </div>
       </footer>
     </div>
